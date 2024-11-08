@@ -57,8 +57,7 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ steps.meta.outputs.tags }}
-          build-args: |
-            HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          build-args: HF_TOKEN=${{ secrets.HF_TOKEN }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
