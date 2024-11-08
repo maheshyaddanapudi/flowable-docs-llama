@@ -55,4 +55,4 @@ After running the container, you can access the text generation web UI interface
 
 ## License
 
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This repository is licensed under the MIT License. See the [LICENSE](https://github.com/maheshyaddanapudi/flowable-docs-llama/blob/main/LICENSE) file for details.
