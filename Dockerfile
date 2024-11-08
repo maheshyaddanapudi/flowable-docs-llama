@@ -11,5 +11,17 @@ WORKDIR /app
 
 RUN mkdir -p /app/models
 
-# Download the model from Hugging Face into the models directory
-RUN python3 download-model.py $MODEL_NAME --output /app/models/$MODEL_NAME
+# Set up Hugging Face authentication with HF_TOKEN
+ARG HF_TOKEN
+RUN huggingface-cli login --token $HF_TOKEN
+
+# Download the model using the Hugging Face CLI to the models directory
+RUN mkdir -p $HF_HOME/models/$MODEL_NAME && \
+    huggingface-cli download $MODEL_NAME --dir-use $HF_HOME/models/$MODEL_NAME
+
+# Move model files to the expected directory for Text Generation Web UI
+RUN mkdir -p /app/models/$MODEL_NAME && \
+    cp -r $HF_HOME/models/$MODEL_NAME/* /app/models/$MODEL_NAME/
+
+# Optional: Clean up cache to reduce image size
+RUN rm -rf $HF_HOME
