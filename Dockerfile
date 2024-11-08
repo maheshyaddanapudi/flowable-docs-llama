@@ -1,5 +1,5 @@
 # Start from the atinoda/text-generation-webui base image
-FROM atinoda/text-generation-webui:default
+FROM atinoda/text-generation-webui:default-cpu
 
 # Environment variables
 ENV MODEL_NAME=zzzmahesh/Flowable-Docs-Llama-3.2-1B
