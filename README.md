@@ -1,10 +1,10 @@
 # Flowable Docs LLaMA Model - Docker Image
 
-This repository hosts a Docker image that extends the [`atinoda/text-generation-webui`](https://hub.docker.com/r/atinoda/text-generation-webui) base image for deploying the `zzzmahesh/Flowable-Docs-Llama-3.2-1B` model on Hugging Face. This containerized setup allows for easy model deployment with the `text-generation-webui` interface, mapping the web port for accessing the model's web interface.
+This repository hosts a Docker image that extends the [`atinoda/text-generation-webui`](https://hub.docker.com/r/atinoda/text-generation-webui) base image to serve the [`zzzmahesh/Flowable-Docs-Llama-3.2-1B`](https://huggingface.co/zzzmahesh/Flowable-Docs-Llama-3.2-1B) model, which is downloaded from the Hugging Face Hub at build time. This containerized setup allows for easy model deployment with the `text-generation-webui` interface, mapping the web port for accessing the model's web interface.
 
 ## Dockerfile Overview 
 
-The Dockerfile starts from the `atinoda/text-generation-webui` base image and configures it to:
+The Dockerfile starts from the `atinoda/text-generation-webui:default-cpu` base image and configures it to:
 - Set up environment variables for the model name and Hugging Face cache.
 - Download the model from the Hugging Face Hub.
 - Make the model available to the `text-generation-webui` so it can be served via a web interface.
@@ -21,17 +21,17 @@ The Dockerfile starts from the `atinoda/text-generation-webui` base image and co
 Clone this repository and navigate into the project directory:
 
 ```bash
-git clone https://github.com/your-username/flowable-llama-docker.git
-cd flowable-llama-docker
+git clone https://github.com/maheshyaddanapudi/flowable-docs-llama.git
+cd flowable-docs-llama
 ```
 
 To build the Docker image, run:
 
 ```bash
-docker build -t flowable-llama-webui .
+docker build --build-arg HF_TOKEN=<your-hugging-face-token> -t flowable-llama-webui .
 ```
 
-This command builds the Docker image and tags it as `flowable-llama-webui`.
+This command builds the Docker image and tags it as `flowable-llama-webui`. The Dockerfile passes `HF_TOKEN` to the model download step, so supply a Hugging Face access token as a build argument.
 
 ### Running the Docker Container
 
@@ -55,4 +55,4 @@ After running the container, you can access the text generation web UI interface
 
 ## License
 
-This repository is licensed under the MIT License. See the [LICENSE](https://github.com/maheshyaddanapudi/flowable-docs-llama/blob/main/LICENSE) file for details.
+This repository is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/maheshyaddanapudi/flowable-docs-llama/blob/main/LICENSE) file for details.
